@@ -8,6 +8,8 @@ const monitorRoutes = require('./routes/monitorRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 const authRoutes = require('./routes/authRoutes');
 const settingsRoutes = require('./routes/settingsRoutes');
+const storageRoutes = require('./routes/storageRoutes');
+const publicRoutes = require('./routes/publicRoutes');
 const { verifyToken } = require('./controllers/AuthController');
 const schedulerService = require('./services/SchedulerService');
 require('dotenv').config();
@@ -41,21 +43,62 @@ app.use((req, res, next) => {
 });
 
 // Static files
-app.use('/storage', express.static(path.join(__dirname, 'storage')));
-app.use('/api/storage', express.static(path.join(__dirname, 'storage')));
+const storageDir = path.join(__dirname, 'storage');
+app.use('/api/storage/screenshots', express.static(path.join(storageDir, 'screenshots')));
+app.use('/api/storage/archives', express.static(path.join(storageDir, 'archives')));
 
 // Routes
+app.use('/', publicRoutes);
 app.use('/api/auth', authRoutes);
 // Protect API routes
 app.use('/api/monitors', verifyToken, monitorRoutes);
 app.use('/api/dashboard', verifyToken, dashboardRoutes);
 app.use('/api/settings', verifyToken, settingsRoutes);
+app.use('/api/storage', storageRoutes);
 
 // Serve frontend (production build) if available
 const distDir = path.join(__dirname, '..', 'frontend', 'dist');
-if (fs.existsSync(distDir)) {
-  app.use(express.static(distDir));
+const shouldServeDist =
+  fs.existsSync(distDir) &&
+  (process.env.NODE_ENV === 'production' ||
+    String(process.env.SERVE_FRONTEND || '')
+      .trim()
+      .toLowerCase() === 'true');
+if (shouldServeDist) {
+  app.use(
+    '/assets',
+    express.static(path.join(distDir, 'assets'), {
+      immutable: true,
+      maxAge: '365d',
+    })
+  );
+  app.use(
+    express.static(distDir, {
+      index: false,
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith(`${path.sep}index.html`)) {
+          res.setHeader('Cache-Control', 'no-store');
+          return;
+        }
+        res.setHeader('Cache-Control', 'no-cache');
+      },
+    })
+  );
+  app.get('/assets/*', (req, res) => {
+    res.status(404).end();
+  });
   app.get('*', (req, res) => {
+    if (req.path.startsWith('/api/')) {
+      res.status(404).json({ error: 'Not found' });
+      return;
+    }
+    if (
+      /\.(?:js|css|map|png|jpe?g|gif|svg|ico|webp|woff2?|ttf|eot)$/i.test(req.path)
+    ) {
+      res.status(404).end();
+      return;
+    }
+    res.setHeader('Cache-Control', 'no-store');
     res.sendFile(path.join(distDir, 'index.html'));
   });
 }

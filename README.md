@@ -59,6 +59,12 @@ npm run dev
 
 前端默认监听：`http://localhost:5173`（端口占用会自动尝试下一个）
 
+### 常见问题
+- 看到 `net::ERR_ABORTED http://localhost:5173/assets/index-*.js`：说明你访问到的是“生产构建 dist”的入口（会引用 `/assets/index-*.js`），而不是 Vite dev 入口（应引用 `/src/main.jsx`）。通常是跑了 `npm run preview`、5173 端口被别的进程占用，或缓存了旧的 `index.html`。
+  - 开发调试：在 `frontend/` 运行 `npm run dev`
+  - 预览构建：先 `npm run build` 再 `npm run preview`
+  - 若仍出现：硬刷新或清浏览器缓存后再试
+
 ## 使用流程（概览）
 - 登录：使用 `ADMIN_PASSWORD`
 - 新建任务：填写 URL、选择 CSS/XPath、设置频率（cron）

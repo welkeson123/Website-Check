@@ -1,5 +1,6 @@
 const { ChangeHistory, PageMonitor } = require('../models');
 const { Op } = require('sequelize');
+const { signDownloadToken } = require('../utils/downloadToken');
 
 exports.listDownloads = async (req, res) => {
   try {
@@ -49,11 +50,10 @@ exports.listDownloads = async (req, res) => {
           changeHistoryId: row.id,
           checkTime: row.checkTime,
           fileName,
-          storedPath,
           size: Number(f.size) || null,
           sourceLink: f.sourceLink || null,
           sourceTitle: f.sourceTitle || null,
-          downloadUrl: `/api/storage/downloads/${encodeURIComponent(storedPath)}`,
+          downloadUrl: `/d/${encodeURIComponent(signDownloadToken({ path: storedPath, name: fileName }, 300))}`,
         });
       }
     }

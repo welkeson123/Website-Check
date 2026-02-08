@@ -102,7 +102,7 @@ const Downloads = () => {
       ellipsis: true,
       render: (v, record) => (
         <a href={record.downloadUrl} target="_blank" rel="noopener noreferrer">
-          {v || record.storedPath}
+          {v || '-'}
         </a>
       ),
     },
@@ -195,7 +195,7 @@ const Downloads = () => {
         </Space>
 
         <Table
-          rowKey={(r) => `${r.changeHistoryId}-${r.storedPath}`}
+          rowKey={(r) => `${r.changeHistoryId}-${r.monitorId}-${r.fileName}`}
           loading={loading}
           columns={columns}
           dataSource={items}

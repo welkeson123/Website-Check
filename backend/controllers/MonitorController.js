@@ -1,6 +1,7 @@
 const { PageMonitor, ChangeHistory } = require('../models');
 const schedulerService = require('../services/SchedulerService');
 const monitorService = require('../services/MonitorService');
+const { signDownloadToken } = require('../utils/downloadToken');
 
 exports.createMonitor = async (req, res) => {
   try {
@@ -66,7 +67,26 @@ exports.getHistory = async (req, res) => {
       order: [['checkTime', 'DESC']],
       limit: 50,
     });
-    res.json(history);
+    const items = history.map((row) => {
+      const v = row.toJSON ? row.toJSON() : row;
+      const attachments = Array.isArray(v.attachments) ? v.attachments : null;
+      if (!attachments || attachments.length === 0) return v;
+      return {
+        ...v,
+        attachments: attachments.map((f) => {
+          const fileName = String(f.name || '');
+          const storedPath = String(f.path || '');
+          const token = signDownloadToken({ path: storedPath, name: fileName }, 300);
+          const rest = { ...f };
+          delete rest.path;
+          return {
+            ...rest,
+            downloadUrl: token ? `/d/${encodeURIComponent(token)}` : '',
+          };
+        }),
+      };
+    });
+    res.json(items);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

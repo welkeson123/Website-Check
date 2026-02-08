@@ -257,11 +257,11 @@ const HistoryList = () => {
                                         <List.Item style={{ padding: '4px 0' }}>
                                             <Space>
                                                 <FileTextOutlined style={{ color: '#1890ff' }} />
-                                                <a href={`/api/storage/downloads/${file.path}`} target="_blank" rel="noopener noreferrer">
+                                                <a href={file.downloadUrl} target="_blank" rel="noopener noreferrer">
                                                     {file.name}
                                                 </a> 
                                                 <Text type="secondary" style={{ fontSize: 12 }}>
-                                                    ({(file.size / 1024).toFixed(1)} KB)
+                                                    ({file.size ? `${(file.size / 1024).toFixed(1)} KB` : '-'})
                                                 </Text>
                                                 {file.sourceLink ? (
                                                   <a href={file.sourceLink} target="_blank" rel="noopener noreferrer" style={{ fontSize: 12 }}>
